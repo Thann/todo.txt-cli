@@ -1109,7 +1109,7 @@ case $action in
             if [ $TODOTXT_VERBOSE -gt 0 ]; then
                 getNewtodo "$item"
                 echo "$item $newtodo"
-                echo "TODO: $item marked as done."
+                echo -n "TODO: $item marked as done."
 	    fi
         else
             echo "TODO: $item is already marked done."
@@ -1119,8 +1119,10 @@ case $action in
     if [ $TODOTXT_AUTO_ARCHIVE = 1 ]; then
         # Recursively invoke the script to allow overriding of the archive
         # action.
-        "$TODO_FULL_SH" archive
+        "$TODO_FULL_SH" archive > /dev/null
+	echo -n " Archived."
     fi
+    echo ""
     ;;
 
 "help" )
