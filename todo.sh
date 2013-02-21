@@ -884,7 +884,8 @@ _format()
             s/'"${HIDE_CONTEXTS_SUBSTITUTION:-^}"'//g
             s/'"${HIDE_CUSTOM_SUBSTITUTION:-^}"'//g
           '''                                                   \
-	| sed "s/↳/\\n\t↳ /g"                                   \
+	| sed "s/↳x[^↳]*//g"                                    \
+        | sed "s/↳/\\n\t↳/g"                                    \
         | eval ${TODOTXT_FINAL_FILTER}                          \
     )
     [ "$filtered_items" ] && echo "$filtered_items"
